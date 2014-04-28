@@ -522,6 +522,13 @@ namespace io{
 		}
 	};
 
+	template<char ... comment_start_char_list>
+	struct single_and_empty_line_comment{
+		static bool is_comment(const char*line){
+			return single_line_comment<comment_start_char_list...>::is_comment(line) || empty_line_comment::is_comment(line);
+		}
+	};
+
 	template<char sep>
 	struct no_quote_escape{
 		static const char*find_next_column_end(const char*col_begin){
